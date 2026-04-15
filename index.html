@@ -367,6 +367,49 @@
     display: none;
   }
   .reset-btn:hover { border-color: var(--sub); color: var(--text); }
+
+  .guide-steps {
+    margin-top: 14px;
+    padding: 14px 16px;
+    background: #F7F2E9;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+  }
+
+  .guide-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--sub);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .guide-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text);
+    padding: 3px 0;
+  }
+
+  .guide-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    min-width: 16px;
+  }
+
+  .guide-key {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    background: #EDEAE3;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 1px 6px;
+    color: var(--sub);
+  }
 </style>
 </head>
 <body>
@@ -409,12 +452,20 @@
     <div class="upload-zone" id="zone2">
       <input type="file" id="file2" accept=".xlsx,.xls">
       <div class="upload-icon">🗂️</div>
-      <div class="upload-text"><strong>파일을 여기에 드래그</strong>하거나 클릭해서 선택<br>전체 재고 정보가 담긴 공동판매 파일</div>
+      <div class="upload-text"><strong>파일을 여기에 드래그</strong>하거나 클릭해서 선택<br>입고 시트 포함 · 업로드 전 K열(판매) <strong>복사 후 값 붙여넣기</strong> 필수</div>
     </div>
     <div class="file-loaded" id="loaded2">
       <span>✓</span>
       <span class="filename" id="fname2"></span>
       <span class="row-count" id="fcount2"></span>
+    </div>
+    <div class="guide-steps">
+      <div class="guide-title">업로드 전 준비 순서</div>
+      <div class="guide-row"><span class="guide-num">①</span> 공동판매 파일 열기</div>
+      <div class="guide-row"><span class="guide-num">②</span> 입고 시트 → K열 전체 선택</div>
+      <div class="guide-row"><span class="guide-num">③</span> 복사 <span class="guide-key">Ctrl+C</span></div>
+      <div class="guide-row"><span class="guide-num">④</span> 같은 자리에 값 붙여넣기 <span class="guide-key">Ctrl+Shift+V</span> → 값만 선택</div>
+      <div class="guide-row"><span class="guide-num">⑤</span> 저장 후 이 페이지에 업로드</div>
     </div>
   </div>
 </div>
