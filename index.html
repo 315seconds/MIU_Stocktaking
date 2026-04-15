@@ -500,7 +500,7 @@ function handleFile(file, loadedId, fnameId, fcountId, zoneId, dataKey) {
         const rows = XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' });
         scanData = rows
           .filter(r => r[0] || r[1])
-          .map(r => ({ store: String(r[0] || '').trim(), barcode: String(r[1] || '').trim() }))
+          .map(r => ({ store: String(r[0] || '').trim(), barcode: String(r[1] || '').trim().toUpperCase() }))
           .filter(r => r.barcode);
         document.getElementById(fnameId).textContent = file.name;
         document.getElementById(fcountId).textContent = scanData.length.toLocaleString() + '건';
@@ -514,7 +514,7 @@ function handleFile(file, loadedId, fnameId, fcountId, zoneId, dataKey) {
         // header is row 0: no, 위치, 입고일, 상품명, 금액, 수량, 바코드, ...
         for (let i = 1; i < rows.length; i++) {
           const r = rows[i];
-          const barcode = String(r[6] || '').trim();
+          const barcode = String(r[6] || '').trim().toUpperCase();
           if (!barcode) continue;
           masterData[barcode] = {
             위치: String(r[1] || '').trim(),
