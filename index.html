@@ -706,23 +706,24 @@ function downloadResult() {
     if (ws[cellRef]) ws[cellRef].s = headerStyle;
   }
 
-  // Row colors by 대조결과
+  // Row colors by 대조결과 — 짝수행(진한톤) / 홀수행(연한톤) 교차
   const FILL = {
-    '정상(매칭)':      'FFE8F3EC',
-    '위치불일치':      'FFFDF0DC',
-    '장부부재(신규)':  'FFF3EFF8',
-    '미스캔(누락의심)': 'FFF5F4F2',
+    '정상(매칭)':      ['FFD6EDE0', 'FFEEF7F2'],
+    '위치불일치':      ['FFFCE5BC', 'FFFDF3E2'],
+    '장부부재(신규)':  ['FFE5DEFF', 'FFF3F0FB'],
+    '미스캔(누락의심)': ['FFE8E6E3', 'FFF5F4F2'],
   };
   const FONT_COLOR = {
-    '정상(매칭)':      'FF2A4A35',
-    '위치불일치':      'FF5A3E0A',
-    '장부부재(신규)':  'FF3A2060',
-    '미스캔(누락의심)': 'FF555050',
+    '정상(매칭)':      'FF1E3D2A',
+    '위치불일치':      'FF4A3200',
+    '장부부재(신규)':  'FF2E1A55',
+    '미스캔(누락의심)': 'FF444040',
   };
 
   for (let ri = 1; ri < wsData.length; ri++) {
     const result = wsData[ri][5];
-    const bgColor = FILL[result] || 'FFFFFFFF';
+    const fills = FILL[result] || ['FFEEEEEE', 'FFFFFFFF'];
+    const bgColor = (ri % 2 === 0) ? fills[0] : fills[1];
     const fontColor = FONT_COLOR[result] || 'FF000000';
     for (let ci = 0; ci < 6; ci++) {
       const cellRef = XLSX.utils.encode_cell({ r: ri, c: ci });
