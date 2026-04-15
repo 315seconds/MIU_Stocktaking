@@ -519,7 +519,8 @@ function handleFile(file, loadedId, fnameId, fcountId, zoneId, dataKey) {
           masterData[barcode] = {
             위치: String(r[1] || '').trim(),
             상품명: String(r[3] || '').trim(),
-            금액: r[4]
+            금액: r[4],
+            판매: Number(r[10]) || 0
           };
           count++;
         }
@@ -617,9 +618,9 @@ function doAnalysis() {
 
   setProgress(60, '미스캔 항목 추출 중...');
 
-  // Step 2: 미스캔 = 마스터에 있는데 스캔 안 된 것
+  // Step 2: 미스캔 = 마스터에 있는데 스캔 안 된 것 (판매된 물건 제외)
   for (const [barcode, info] of Object.entries(masterData)) {
-    if (!scannedBarcodes.has(barcode)) {
+    if (!scannedBarcodes.has(barcode) && info.판매 < 1) {
       rows.push({
         지점명: '',       // A열 비움
         바코드: barcode,
